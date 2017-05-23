@@ -1,0 +1,16 @@
+import requests
+
+
+def project_commiters(project):
+	r = requests.get("https://api.github.com/repos/" + project + '/commits')
+	list = r.json()
+	commiters = []
+	for element in list:
+		if element['author'] != None:
+			seen = 0
+			for commiter in commiters:
+				if commiter == element['author']['login']:
+					seen = 1
+			if seen == 0:
+				commiters.append(element['author']['login'])
+	return commiters
