@@ -2,7 +2,8 @@ import requests
 
 
 def project_commiters(project):
-	r = requests.get("https://api.github.com/repos/" + project + '/commits')
+	authentificator = ('IlyaDerendyaev', 'Ilovey0u')
+	r = requests.get("https://api.github.com/repos/" + project + '/commits', auth = authentificator)
 	list = r.json()
 	commiters = []
 	for element in list:
