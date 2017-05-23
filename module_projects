@@ -1,10 +1,10 @@
 import requests
 
 def user_projects(user):
-	r = requests.get("https://api.github.com/users/" + user + "/repos")
+	authentificator = ('IlyaDerendyaev', 'Ilovey0u')
+	r = requests.get("https://api.github.com/users/" + user + "/repos", auth = authentificator)
 	list = r.json()
 	projects = []
 	for element in list:
-		if element['watchers'] > 2:
-			projects.append(element['full_name'])
+		projects.append(element['full_name'])
 	return projects
