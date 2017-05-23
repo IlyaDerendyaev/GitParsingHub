@@ -4,32 +4,6 @@ from bs4 import BeautifulSoup as bs
 from graphviz import Digraph
 
 
-def user_projects(user):
-	r = requests.get("https://api.github.com/users/" + user + "/repos")
-	list = r.json()
-	projects = []
-	for element in list:
-		if element['watchers'] > 4:
-			projects.append(element['full_name'])
-	return projects
-
-
-def project_commiters(project):
-	r = requests.get("https://api.github.com/repos/" + project + '/commits')
-	list = r.json()
-	commiters = []
-	for element in list:
-		if element['author'] != None:
-			seen = 0
-			for commiter in commiters:
-				if commiter == element['author']['login']:
-					seen = 1
-			if seen == 0:
-				commiters.append(element['author']['login'])
-	return commiters
-
-
-
 f = open('input.txt')
 str = f.read()
 f.close()
