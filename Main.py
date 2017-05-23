@@ -1,7 +1,8 @@
 
 import requests
-from bs4 import BeautifulSoup as bs
 from graphviz import Digraph
+import module_commiters
+import module_projects
 
 
 f = open('input.txt')
@@ -22,14 +23,14 @@ for user in users:
 
 
 for user in users:
-	user_repos = user_projects(user)
+	user_repos = module_projects.user_projects(user)
 	i = 0
 	n = min(len(user_repos), 5)
 	while i < n:
 		repo = user_repos[i]
 		i = i + 1
 		dot.node(repo, repo)
-		commiters = project_commiters(repo)
+		commiters = module_commiters.project_commiters(repo)
 		result = list(set(commiters) & set(users))
 		for commiter in result:
 			dot.edge(commiter, repo)
